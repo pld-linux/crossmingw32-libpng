@@ -1,0 +1,40 @@
+diff -ruN libpng-1.2.6beta2./Makefile libpng-1.2.6beta2/Makefile
+--- libpng-1.2.6beta2./Makefile	2003-12-25 15:41:53.000000000 +0100
++++ libpng-1.2.6beta2/Makefile	2003-12-25 15:43:53.920897736 +0100
+@@ -93,12 +93,15 @@
+ .c.pic.o:
+ 	$(CC) -c $(CFLAGS) -fPIC -o $@ $*.c
+ 
+-all: libpng.a $(LIBNAME).so pngtest pngtest-static libpng.pc libpng-config
++all: libpng.a png.dll libpng.pc libpng-config
+ 
+ libpng.a: $(OBJS)
+ 	$(AR) $(ARFLAGS) $@ $(OBJS)
+ 	$(RANLIB) $@
+ 
++png.dll: $(OBJS)
++	$(CC) -shared $(OBJS) -Wl,--enable-auto-image-base -o png.dll -Wl,--out-implib,libpng.dll.a -lz
++
+ libpng.pc:
+ 	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! > libpng.pc
+ 
+diff -ruN libpng-1.2.6beta2./scripts/makefile.gcmmx libpng-1.2.6beta2/scripts/makefile.gcmmx
+--- libpng-1.2.6beta2./scripts/makefile.gcmmx	2003-12-25 15:41:53.000000000 +0100
++++ libpng-1.2.6beta2/scripts/makefile.gcmmx	2003-12-25 15:43:53.920897736 +0100
+@@ -93,12 +93,15 @@
+ .c.pic.o:
+ 	$(CC) -c $(CFLAGS) -fPIC -o $@ $*.c
+ 
+-all: libpng.a $(LIBNAME).so pngtest pngtest-static libpng.pc libpng-config
++all: libpng.a png.dll pngtest pngtest-static libpng.pc libpng-config
+ 
+ libpng.a: $(OBJS)
+ 	$(AR) $(ARFLAGS) $@ $(OBJS)
+ 	$(RANLIB) $@
+ 
++png.dll: $(OBJS)
++	$(CC) -shared $(OBJS) -Wl,--enable-auto-image-base -o png.dll -Wl,--out-implib,libpng.dll.a
++
+ libpng.pc:
+ 	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! > libpng.pc
+ 
