@@ -3,20 +3,18 @@ Summary:	PNG library - Mingw32 cross version
 Summary(pl):	Biblioteka PNG - wersja skro¶na dla Mingw32
 Name:		crossmingw32-%{realname}
 Version:	1.2.6
-Release:	3.beta2
+Release:	4
 License:	distributable
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}beta2.tar.bz2
-# Source0-md5:	45c811627b6fe4d37ec191b4548da949
+Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
+# Source0-md5:	2518e496ad45c3531285b58016a6be5c
 Patch0:		%{realname}-pngminus.patch
 Patch1:		%{realname}-badchunks.patch
 Patch2:		%{realname}-opt.patch
 Patch3:		%{realname}-revert.patch
-Patch4:		%{realname}-16bit-overflow.patch
-Patch5:		%{realname}-norpath.patch
-Patch6:		%{realname}-libdirfix.patch
-Patch7:		%{realname}-pngerror.patch
-Patch8:		%{name}-shared.patch
+Patch4:		%{realname}-norpath.patch
+Patch5:		%{realname}-libdirfix.patch
+Patch6:		%{name}-shared.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-w32api
@@ -60,15 +58,13 @@ libpng - DLL library for Windows.
 libpng - biblioteka DLL dla Windows.
 
 %prep
-%setup -q -n %{realname}-%{version}beta2
+%setup -q -n %{realname}-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %ifarch %{ix86}
 ln -sf scripts/makefile.gcmmx ./Makefile
@@ -76,7 +72,7 @@ ln -sf scripts/makefile.gcmmx ./Makefile
 ln -sf scripts/makefile.linux ./Makefile
 %endif
 
-%patch8 -p1
+%patch6 -p1
 
 %build
 %{__make} \
