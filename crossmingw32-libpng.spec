@@ -2,12 +2,12 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl):	Biblioteka PNG - wersja skro¶na dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.7
-Release:	3
+Version:	1.2.8
+Release:	1
 License:	distributable
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
-# Source0-md5:	21030102f99f81c37276403e5956d198
+# Source0-md5:	00cea4539bea4bd34cbf8b82ff9589cd
 Patch0:		%{realname}-pngminus.patch
 Patch1:		%{realname}-badchunks.patch
 Patch2:		%{realname}-opt.patch
@@ -16,10 +16,10 @@ Patch4:		%{realname}-norpath.patch
 Patch5:		%{realname}-libdirfix.patch
 Patch6:		%{name}-shared.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
-Requires:	crossmingw32-runtime
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-w32api
 BuildRequires:	crossmingw32-zlib
+Requires:	crossmingw32-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
