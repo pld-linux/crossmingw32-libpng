@@ -19,7 +19,7 @@ URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-w32api
 BuildRequires:	crossmingw32-zlib
-Requires:	crossmingw32-runtime
+Requires:	crossmingw32-zlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
