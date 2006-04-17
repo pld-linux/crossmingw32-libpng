@@ -1,38 +1,38 @@
---- libpng-1.2.6/scripts/makefile.gcmmx.orig	2004-08-30 20:57:04.085826112 +0200
-+++ libpng-1.2.6/scripts/makefile.gcmmx	2004-08-30 21:15:26.422245504 +0200
-@@ -92,12 +92,15 @@
+--- libpng-1.2.9/scripts/makefile.gcmmx.orig	2006-04-17 02:42:00.719772250 +0200
++++ libpng-1.2.9/scripts/makefile.gcmmx	2006-04-17 02:45:16.564011750 +0200
+@@ -107,12 +107,15 @@
  .c.pic.o:
  	$(CC) -c $(CFLAGS) -fPIC -o $@ $*.c
  
--all: libpng.a $(LIBNAME).so pngtest pngtest-static libpng.pc libpng-config
+-all: libpng.a $(LIBSO) pngtest pngtest-static libpng.pc libpng-config
 +all: libpng.a png.dll libpng-config
  
  libpng.a: $(OBJS)
- 	ar rc $@ $(OBJS)
+ 	$(AR_RC) $@ $(OBJS)
  	$(RANLIB) $@
  
 +png.dll: $(OBJS)
 +	$(CC) -shared $(OBJS) -Wl,--enable-auto-image-base -o png.dll -Wl,--out-implib,libpng.dll.a -lz
 +
  libpng.pc:
- 	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! -e s\!@LIBPATH@!$(LIBPATH)! > libpng.pc
+ 	cat scripts/libpng.pc.in | sed -e "s,@prefix@,$(prefix),;s,@exec_prefix@,$(exec_prefix),;s,@libdir@,$(LIBPATH),;s,@includedir@,$(INCPATH),;s,@PNGLIB_VERSION@,$(PNGMIN),;s,@PNGLIB_MAJOR@,12," > libpng.pc
  
---- libpng-1.2.6/scripts/makefile.linux.orig	2004-08-30 20:57:04.083826000 +0200
-+++ libpng-1.2.6/scripts/makefile.linux	2004-08-30 21:16:34.527891872 +0200
-@@ -71,12 +71,15 @@
+--- libpng-1.2.9/scripts/makefile.linux.orig	2006-04-17 02:42:00.719772250 +0200
++++ libpng-1.2.9/scripts/makefile.linux	2006-04-17 02:45:49.770087000 +0200
+@@ -84,12 +84,15 @@
  .c.pic.o:
  	$(CC) -c $(CFLAGS) -fPIC -o $@ $*.c
  
--all: libpng.a $(LIBNAME).so pngtest pngtest-static libpng.pc libpng-config
+-all: libpng.a $(LIBSO) pngtest pngtest-static libpng.pc libpng-config
 +all: libpng.a png.dll libpng-config
  
  libpng.a: $(OBJS)
- 	ar rc $@ $(OBJS)
+ 	$(AR_RC) $@ $(OBJS)
  	$(RANLIB) $@
  
 +png.dll: $(OBJS)
 +	$(CC) -shared $(OBJS) -Wl,--enable-auto-image-base -o png.dll -Wl,--out-implib,libpng.dll.a -lz
 +
  libpng.pc:
- 	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! -e s\!@LIBPATH@!$(LIBPATH)! > libpng.pc
+ 	cat scripts/libpng.pc.in | sed -e "s,@prefix@,$(prefix),;s,@exec_prefix@,$(exec_prefix),;s,@libdir@,$(LIBPATH),;s,@includedir@,$(INCPATH),;s,@PNGLIB_VERSION@,$(PNGMIN),;s,@PNGLIB_MAJOR@,12," > libpng.pc
  
