@@ -2,19 +2,18 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl):	Biblioteka PNG - wersja skro¶na dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.8
+Version:	1.2.9
 Release:	1
 License:	distributable
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
-# Source0-md5:	00cea4539bea4bd34cbf8b82ff9589cd
+# Source0-md5:	667fa75c8cbb6875f3d1c2b4bef35081
 Patch0:		%{realname}-pngminus.patch
-Patch1:		%{realname}-badchunks.patch
-Patch2:		%{realname}-opt.patch
-Patch3:		%{realname}-revert.patch
-Patch4:		%{realname}-norpath.patch
-Patch5:		%{realname}-libdirfix.patch
-Patch6:		%{name}-shared.patch
+Patch1:		%{realname}-opt.patch
+Patch2:		%{realname}-revert.patch
+Patch3:		%{realname}-norpath.patch
+Patch4:		%{realname}-libdirfix.patch
+Patch5:		%{name}-shared.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-w32api
@@ -65,7 +64,6 @@ libpng - biblioteka DLL dla Windows.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %ifarch %{ix86}
 ln -sf scripts/makefile.gcmmx ./Makefile
@@ -73,7 +71,7 @@ ln -sf scripts/makefile.gcmmx ./Makefile
 ln -sf scripts/makefile.linux ./Makefile
 %endif
 
-%patch6 -p1
+%patch5 -p1
 
 %build
 %{__make} \
@@ -107,4 +105,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dll
 %defattr(644,root,root,755)
-%{_datadir}/wine/windows/system
+%{_datadir}/wine/windows/system/*.dll
