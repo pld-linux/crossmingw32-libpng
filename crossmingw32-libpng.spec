@@ -1,6 +1,6 @@
 %define		realname	libpng
 Summary:	PNG library - Mingw32 cross version
-Summary(pl):	Biblioteka PNG - wersja skro∂na dla Mingw32
+Summary(pl.UTF-8):   Biblioteka PNG - wersja skro≈õna dla Mingw32
 Name:		crossmingw32-%{realname}
 Version:	1.2.16
 Release:	1
@@ -41,20 +41,20 @@ The PNG library is a collection of routines used to create and
 manipulate PNG format graphics files. The PNG format was designed as a
 replacement for GIF, with many improvements and extensions.
 
-%description -l pl
-Biblioteki PNG s± kolekcj± form uøywanych do tworzenia i manipulowania
-plikami w formacie graficznym PNG. Format ten zosta≥ stworzony jako
-zamiennik dla formatu GIF, z wieloma rozszerzeniami i nowo∂ciami.
+%description -l pl.UTF-8
+Biblioteki PNG sƒÖ kolekcjƒÖ form u≈ºywanych do tworzenia i manipulowania
+plikami w formacie graficznym PNG. Format ten zosta≈Ç stworzony jako
+zamiennik dla formatu GIF, z wieloma rozszerzeniami i nowo≈õciami.
 
 %package dll
 Summary:	libpng - DLL library for Windows
-Summary(pl):	libpng - biblioteka DLL dla Windows
+Summary(pl.UTF-8):   libpng - biblioteka DLL dla Windows
 Group:		Applications/Emulators
 
 %description dll
 libpng - DLL library for Windows.
 
-%description dll -l pl
+%description dll -l pl.UTF-8
 libpng - biblioteka DLL dla Windows.
 
 %prep
