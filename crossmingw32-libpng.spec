@@ -1,6 +1,6 @@
 %define		realname	libpng
 Summary:	PNG library - Mingw32 cross version
-Summary(pl.UTF-8):   Biblioteka PNG - wersja skrośna dla Mingw32
+Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
 Name:		crossmingw32-%{realname}
 Version:	1.2.16
 Release:	1
@@ -48,7 +48,7 @@ zamiennik dla formatu GIF, z wieloma rozszerzeniami i nowościami.
 
 %package dll
 Summary:	libpng - DLL library for Windows
-Summary(pl.UTF-8):   libpng - biblioteka DLL dla Windows
+Summary(pl.UTF-8):	libpng - biblioteka DLL dla Windows
 Group:		Applications/Emulators
 
 %description dll
