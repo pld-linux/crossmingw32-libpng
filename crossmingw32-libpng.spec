@@ -23,14 +23,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
 
-%define		target		i386-mingw32
-%define		target_platform	i386-pc-mingw32
-%define		arch		%{_prefix}/%{target}
-%define		gccarch		%{_prefix}/lib/gcc-lib/%{target}
-%define		gcclib		%{_prefix}/lib/gcc-lib/%{target}/%{version}
+%define		target			i386-mingw32
+%define		target_platform 	i386-pc-mingw32
+%define		arch			%{_prefix}/%{target}
+%define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
+%define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
-%define		__cc		%{target}-gcc
-%define		__cxx		%{target}-g++
+%define		_sysprefix		/usr
+%define		_prefix			%{_sysprefix}/%{target}
+%define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
+%define		__cc			%{target}-gcc
+%define		__cxx			%{target}-g++
 
 %ifarch alpha sparc sparc64 sparcv9
 %define		optflags	-O2
@@ -46,16 +49,16 @@ Biblioteki PNG są kolekcją form używanych do tworzenia i manipulowania
 plikami w formacie graficznym PNG. Format ten został stworzony jako
 zamiennik dla formatu GIF, z wieloma rozszerzeniami i nowościami.
 
-%package dll
-Summary:	libpng - DLL library for Windows
-Summary(pl.UTF-8):	libpng - biblioteka DLL dla Windows
-Group:		Applications/Emulators
-
-%description dll
-libpng - DLL library for Windows.
-
-%description dll -l pl.UTF-8
-libpng - biblioteka DLL dla Windows.
+#%package dll
+#Summary:	libpng - DLL library for Windows
+#Summary(pl.UTF-8):	libpng - biblioteka DLL dla Windows
+#Group:		Applications/Emulators
+#
+#%description dll
+#libpng - DLL library for Windows.
+#
+#%description dll -l pl.UTF-8
+#libpng - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
@@ -70,35 +73,48 @@ ln -sf scripts/makefile.gcmmx ./Makefile
 %patch5 -p1
 
 %build
-%{__make} \
-	prefix=%{_arch} \
-	LIBPATH=%{_arch}/lib \
-	CC="%{target}-gcc" \
-	RANLIB="%{target}-ranlib"
-	OPT_FLAGS="%{rpmcflags}"
+#%{__make} \
+#	prefix=%{_arch} \
+#	LIBPATH=%{_arch}/lib \
+#	CC="%{target}-gcc" \
+#	RANLIB="%{target}-ranlib" \
+#	OPT_FLAGS="%{rpmcflags}" \
+#	LDFLAGS="-static %{rpmldflags}"
+%configure \
+	--target=%{target} \
+	--host=%{target} \
+	--with-pkgconfigdir=%{_pkgconfigdir}
+
+%{__make}
 
 %if 0%{!?debug:1}
-%{target}-strip -R.comment -R.note *.dll
-%{target}-strip -g -R.comment -R.note *.a
+%{target}-strip -R.comment -R.note .libs/*.dll
+%{target}-strip -g -R.comment -R.note .libs/*.a
 %endif
 
 %install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{arch}/{include,lib}
-install -d $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
-
-install *.a $RPM_BUILD_ROOT%{arch}/lib
-install png.h pngconf.h $RPM_BUILD_ROOT%{arch}/include
-install *.dll $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
+#rm -rf $RPM_BUILD_ROOT
+#install -d $RPM_BUILD_ROOT%{arch}/{include,lib}
+# install -d $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
+#
+#install *.a $RPM_BUILD_ROOT%{arch}/lib
+#install png.h pngconf.h $RPM_BUILD_ROOT%{arch}/include
+#install *.dll $RPM_BUILD_ROOT%{_datadir}/wine/windows/system
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{arch}/include/*
-%{arch}/lib/*
+%dir %{_includedir}/libpng12
+%{_includedir}/libpng12/*
+%{_libdir}/*.la
+%{_libdir}/*.a
+%{_bindir}/*.dll
+%{_pkgconfigdir}/*.pc
 
-%files dll
-%defattr(644,root,root,755)
-%{_datadir}/wine/windows/system/*.dll
+#%files dll
+#%defattr(644,root,root,755)
+#%{_datadir}/wine/windows/system/*.dll
