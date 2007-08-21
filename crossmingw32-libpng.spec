@@ -2,12 +2,12 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.16
+Version:	1.2.19
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
-# Source0-md5:	7a1ca4f49bcffdec60d50f48460642bd
+# Source0-md5:	02aac1f1aecc096f6045676e977ec641
 Patch0:		%{realname}-pngminus.patch
 Patch1:		%{realname}-opt.patch
 Patch2:		%{realname}-revert.patch
@@ -23,8 +23,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		no_install_post_strip	1
 
 %define		target			i386-mingw32
-%define		target_platform 	i386-pc-mingw32
-%define		arch			%{_prefix}/%{target}
+%define		target_platform		i386-pc-mingw32
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
