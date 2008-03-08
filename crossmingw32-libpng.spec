@@ -2,20 +2,22 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.24
+Version:	1.2.25
 Release:	1
 License:	distributable
 Group:		Development/Libraries
-Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.bz2
-# Source0-md5:	1e676c5cc7dfa4ef78affe8fb8f1011d
+Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.lzma
+# Source0-md5:	f340daef5a039ec6d25bddc9b3b91a52
 Patch0:		%{realname}-pngminus.patch
 Patch1:		%{realname}-opt.patch
 Patch2:		%{realname}-revert.patch
 Patch3:		%{realname}-norpath.patch
-Patch4:		%{name}-shared.patch
+Patch4:		%{realname}-apng.patch
+Patch5:		%{name}-shared.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
+BuildRequires:	lzma >= 1:4.42
 Requires:	crossmingw32-zlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,12 +78,14 @@ libpng - DLL library for Windows.
 libpng - biblioteka DLL dla Windows.
 
 %prep
-%setup -q -n %{realname}-%{version}
+%setup -q -n %{realname}-%{version} -c -T
+lzma -dc %{SOURCE0} | tar xf - -C ..
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+%patch4 -p0
+%patch5 -p1
 
 %build
 %configure \
