@@ -19,6 +19,7 @@ BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
 BuildRequires:	lzma >= 1:4.42
 Requires:	crossmingw32-zlib
+Provides:	crossmingw32-libpng(APNG) = 0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -57,6 +58,7 @@ Summary:	Static libpng library (cross mingw32 version)
 Summary(pl.UTF-8):	Statyczna biblioteka libpng (wersja skrośna mingw32)
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Provides:	crossmingw32-libpng-static(APNG) = 0.10
 
 %description static
 Static libpng library (cross mingw32 version).
@@ -70,6 +72,7 @@ Summary(pl.UTF-8):	libpng - biblioteka DLL dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-zlib-dll
 Requires:	wine
+Provides:	crossmingw32-libpng-dll(APNG) = 0.10
 
 %description dll
 libpng - DLL library for Windows.
