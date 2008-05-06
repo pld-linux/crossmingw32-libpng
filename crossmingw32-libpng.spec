@@ -2,22 +2,25 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.26
+Version:	1.2.28
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.lzma
-# Source0-md5:	08910ba5da02003b81afb30f630b98a5
+# Source0-md5:	8c57a49f822b12374af7668633c11e45
 Patch0:		%{realname}-pngminus.patch
 Patch1:		%{realname}-opt.patch
 Patch2:		%{realname}-revert.patch
 Patch3:		%{realname}-norpath.patch
+# http://littlesvr.ca/apng/
 Patch4:		%{realname}-apng.patch
-Patch5:		%{realname}-cve.patch
-Patch6:		%{name}-shared.patch
+Patch5:		%{name}-shared.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
+BuildRequires:	libtool
 BuildRequires:	lzma >= 1:4.42
 Requires:	crossmingw32-zlib
 Provides:	crossmingw32-libpng(APNG) = 0.10
@@ -90,15 +93,20 @@ lzma -dc %{SOURCE0} | tar xf - -C ..
 %patch3 -p1
 %patch4 -p0
 %patch5 -p1
-%patch6 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--target=%{target} \
 	--host=%{target} \
 	--with-pkgconfigdir=%{_pkgconfigdir}
 
-%{__make}
+%{__make} \
+	ECHO=echo
 
 %install
 rm -rf $RPM_BUILD_ROOT
