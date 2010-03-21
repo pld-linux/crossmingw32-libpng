@@ -2,26 +2,20 @@
 Summary:	PNG library - Mingw32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
 Name:		crossmingw32-%{realname}
-Version:	1.2.35
+Version:	1.4.1
 Release:	1
 License:	distributable
 Group:		Development/Libraries
-Source0:	http://dl.sourceforge.net/libpng/%{realname}-%{version}.tar.lzma
-# Source0-md5:	c6ccc2e011a940f0fc7620b1a2fb96c8
+Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
+# Source0-md5:	d4cb0236cce9ce8ff49a22994a01f9e0
 Patch0:		%{realname}-pngminus.patch
-Patch1:		%{realname}-opt.patch
-Patch2:		%{realname}-revert.patch
-Patch3:		%{realname}-norpath.patch
-# http://littlesvr.ca/apng/
-Patch4:		%{realname}-apng.patch
-Patch5:		%{name}-shared.patch
+# http://littlesvr.ca/apng/diff/%{name}-%{version}-apng.patch | dos2unix
+Patch1:		%{realname}-apng.patch
+Patch2:		%{realname}-read-dither.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
-BuildRequires:	libtool
-BuildRequires:	lzma >= 1:4.42
+BuildRequires:	xz >= 1:4.999.7
 Requires:	crossmingw32-zlib
 Provides:	crossmingw32-libpng(APNG) = 0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -89,20 +83,12 @@ libpng - biblioteka DLL dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version} -c -T
-lzma -dc %{SOURCE0} | tar xf - -C ..
+xz -dc %{SOURCE0} | tar xf - -C ..
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 %patch2 -p1
-%patch3 -p1
-%patch4 -p0
-%patch5 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
 %configure \
 	--target=%{target} \
 	--host=%{target} \
@@ -119,6 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
+ln -sf libpng14.dll.a $RPM_BUILD_ROOT%{_libdir}/libpng.dll.a
+
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
@@ -131,20 +119,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%{_libdir}/libpng14.dll.a
 %{_libdir}/libpng.dll.a
-%{_libdir}/libpng12.dll.a
+%{_libdir}/libpng14.la
 %{_libdir}/libpng.la
-%{_libdir}/libpng12.la
-%dir %{_includedir}/libpng12
-%{_includedir}/libpng12/*
-%{_pkgconfigdir}/*.pc
+%{_includedir}/libpng14
+%{_includedir}/png*.h
+%{_pkgconfigdir}/libpng14.pc
+%{_pkgconfigdir}/libpng.pc
 
 %files static
 %defattr(644,root,root,755)
+%{_libdir}/libpng14.a
 %{_libdir}/libpng.a
-%{_libdir}/libpng12.a
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libpng-*.dll
-%{_dlldir}/libpng12-*.dll
+%{_dlldir}/libpng14-*.dll
