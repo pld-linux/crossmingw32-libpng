@@ -15,6 +15,7 @@ Patch2:		%{realname}-read-dither.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
+BuildRequires:	sed >= 4.0
 BuildRequires:	xz >= 1:4.999.7
 Requires:	crossmingw32-zlib
 Provides:	crossmingw32-libpng(APNG) = 0.10
@@ -87,6 +88,9 @@ xz -dc %{SOURCE0} | tar xf - -C ..
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
+
+# avoid version script
+sed -i -e 's/^GLD=.*/GLD=/' configure
 
 %build
 %configure \
