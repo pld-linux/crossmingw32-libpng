@@ -15,6 +15,7 @@ URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
 BuildRequires:	sed >= 4.0
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz >= 1:4.999.7
 Requires:	crossmingw32-zlib
 Provides:	crossmingw32-libpng(APNG) = 0.10
