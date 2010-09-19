@@ -1,6 +1,6 @@
 %define		realname	libpng
-Summary:	PNG library - Mingw32 cross version
-Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla Mingw32
+Summary:	PNG library - MinGW32 cross version
+Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
 Version:	1.4.3
 Release:	1
@@ -56,17 +56,17 @@ zamiennik dla formatu GIF, z wieloma rozszerzeniami i nowościami.
 Ten pakiet zawiera wersję skrośną dla Win32.
 
 %package static
-Summary:	Static libpng library (cross mingw32 version)
-Summary(pl.UTF-8):	Statyczna biblioteka libpng (wersja skrośna mingw32)
+Summary:	Static libpng library (cross MinGW32 version)
+Summary(pl.UTF-8):	Statyczna biblioteka libpng (wersja skrośna MinGW32)
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	crossmingw32-libpng-static(APNG) = 0.10
 
 %description static
-Static libpng library (cross mingw32 version).
+Static libpng library (cross MinGW32 version).
 
 %description static -l pl.UTF-8
-Statyczna biblioteka libpng (wersja skrośna mingw32).
+Statyczna biblioteka libpng (wersja skrośna MinGW32).
 
 %package dll
 Summary:	libpng - DLL library for Windows
