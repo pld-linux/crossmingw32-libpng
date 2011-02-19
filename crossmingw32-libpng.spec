@@ -3,7 +3,7 @@ Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
 Version:	1.4.5
-Release:	1
+Release:	2
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
@@ -39,8 +39,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		optflags	-O2
 %endif
 # -z options are invalid for mingw linker
-%define		filterout_ld	-Wl,-z,.*
-%define		filterout_c	-gdwarf-3
+%define		filterout_ld    -Wl,-z,.*
 
 %description
 The PNG library is a collection of routines used to create and
