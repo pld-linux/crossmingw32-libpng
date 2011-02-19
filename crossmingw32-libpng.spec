@@ -40,6 +40,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 # -z options are invalid for mingw linker
 %define		filterout_ld	-Wl,-z,.*
+%define		filterout_c	-gdwarf-3
 
 %description
 The PNG library is a collection of routines used to create and
