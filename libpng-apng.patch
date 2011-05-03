@@ -2,7 +2,7 @@ Index: pngread.c
 ===================================================================
 --- pngread.c
 +++ pngread.c
-@@ -300,6 +300,11 @@
+@@ -278,6 +278,11 @@
  #ifdef PNG_READ_zTXt_SUPPORTED
        PNG_zTXt;
  #endif
@@ -14,7 +14,7 @@ Index: pngread.c
        png_uint_32 length = png_read_chunk_header(png_ptr);
        PNG_CONST png_bytep chunk_name = png_ptr->chunk_name;
  
-@@ -343,6 +348,9 @@
+@@ -321,6 +326,9 @@
                    !(png_ptr->mode & PNG_HAVE_PLTE))
              png_error(png_ptr, "Missing PLTE before IDAT");
  
@@ -24,7 +24,7 @@ Index: pngread.c
           png_ptr->idat_size = length;
           png_ptr->mode |= PNG_HAVE_IDAT;
           break;
-@@ -415,12 +423,95 @@
+@@ -393,12 +401,95 @@
        else if (!png_memcmp(chunk_name, png_iTXt, 4))
           png_handle_iTXt(png_ptr, info_ptr, length);
  #endif
@@ -120,7 +120,7 @@ Index: pngread.c
  /* Optional call to update the users info_ptr structure */
  void PNGAPI
  png_read_update_info(png_structp png_ptr, png_infop info_ptr)
-@@ -461,6 +552,10 @@
+@@ -439,6 +530,10 @@
  png_read_row(png_structp png_ptr, png_bytep row, png_bytep dsp_row)
  {
     PNG_IDAT;
@@ -128,10 +128,10 @@ Index: pngread.c
 +   PNG_fdAT;
 +   PNG_IEND;
 +#endif
+ #ifdef PNG_READ_INTERLACING_SUPPORTED
     PNG_CONST int png_pass_dsp_mask[7] = {0xff, 0x0f, 0xff, 0x33, 0xff, 0x55,
        0xff};
-    PNG_CONST int png_pass_mask[7] = {0x80, 0x08, 0x88, 0x22, 0xaa, 0x55, 0xff};
-@@ -596,13 +691,39 @@
+@@ -583,13 +678,39 @@
     {
        if (!(png_ptr->zstream.avail_in))
        {
@@ -173,7 +173,7 @@ Index: pngread.c
           }
           png_ptr->zstream.avail_in = (uInt)png_ptr->zbuf_size;
           png_ptr->zstream.next_in = png_ptr->zbuf;
-@@ -620,6 +741,9 @@
+@@ -607,6 +728,9 @@
              png_benign_error(png_ptr, "Extra compressed data");
           png_ptr->mode |= PNG_AFTER_IDAT;
           png_ptr->flags |= PNG_FLAG_ZLIB_FINISHED;
@@ -183,7 +183,7 @@ Index: pngread.c
           break;
        }
        if (ret != Z_OK)
-@@ -875,6 +999,11 @@
+@@ -862,6 +986,11 @@
  #ifdef PNG_READ_zTXt_SUPPORTED
        PNG_zTXt;
  #endif
@@ -195,7 +195,7 @@ Index: pngread.c
        png_uint_32 length = png_read_chunk_header(png_ptr);
        PNG_CONST png_bytep chunk_name = png_ptr->chunk_name;
  
-@@ -974,6 +1103,14 @@
+@@ -961,6 +1090,14 @@
        else if (!png_memcmp(chunk_name, png_iTXt, 4))
           png_handle_iTXt(png_ptr, info_ptr, length);
  #endif
