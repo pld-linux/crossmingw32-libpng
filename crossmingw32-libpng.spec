@@ -2,15 +2,16 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.4.8
+Version:	1.5.7
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	2ce595d571f2b06a9403ed5bcfa4ecbd
+# Source0-md5:	c3ae9ce4e81ec0aafdd4ac961586ee0d
 Patch0:		%{realname}-pngminus.patch
-# http://littlesvr.ca/apng/diff/%{name}-%{version}-apng.patch | dos2unix
-Patch1:		%{realname}-apng.patch
+Patch1:		http://downloads.sourceforge.net/libpng-apng/%{realname}-%{version}-apng.patch.gz
+# Patch1-md5:	6c6a674048cec94db1bc35decf0d142c
+Patch2:		%{realname}-apng-fix.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
@@ -85,7 +86,8 @@ libpng - biblioteka DLL dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
-%patch1 -p0
+%patch1 -p1
+%patch2 -p1
 
 # avoid version script
 sed -i -e 's/^GLD=.*/GLD=/' configure
@@ -107,34 +109,34 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
-ln -sf libpng14.dll.a $RPM_BUILD_ROOT%{_libdir}/libpng.dll.a
+ln -sf libpng15.dll.a $RPM_BUILD_ROOT%{_libdir}/libpng.dll.a
 
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/man
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libpng14.dll.a
+%{_libdir}/libpng15.dll.a
 %{_libdir}/libpng.dll.a
-%{_libdir}/libpng14.la
+%{_libdir}/libpng15.la
 %{_libdir}/libpng.la
-%{_includedir}/libpng14
+%{_includedir}/libpng15
 %{_includedir}/png*.h
-%{_pkgconfigdir}/libpng14.pc
+%{_pkgconfigdir}/libpng15.pc
 %{_pkgconfigdir}/libpng.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libpng14.a
+%{_libdir}/libpng15.a
 %{_libdir}/libpng.a
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libpng14-*.dll
+%{_dlldir}/libpng15-*.dll
