@@ -1,9 +1,9 @@
---- libpng-1.5.7/scripts/symbols.def.orig	2011-12-15 16:45:34.000000000 +0100
-+++ libpng-1.5.7/scripts/symbols.def	2011-12-18 19:44:57.326436207 +0100
-@@ -239,3 +239,24 @@
-  png_get_cHRM_XYZ_fixed @231
+--- libpng-1.5.10/scripts/symbols.def.orig	2012-03-29 07:06:56.000000000 +0200
++++ libpng-1.5.10/scripts/symbols.def	2012-04-25 17:53:13.007292298 +0200
+@@ -240,3 +240,24 @@
   png_set_cHRM_XYZ @232
   png_set_cHRM_XYZ_fixed @233
+  png_set_check_for_invalid_index @234
 +;missing warning
 + png_write_frame_head @1001
 + png_write_frame_tail @1002
@@ -25,13 +25,13 @@
 + png_get_first_frame_is_hidden @1018
 + png_set_first_frame_is_hidden @1019
 + png_read_frame_head @1020
---- libpng-1.5.7/png.h.orig	2011-12-18 18:57:09.559673517 +0100
-+++ libpng-1.5.7/png.h	2011-12-18 19:44:48.716435917 +0100
+--- libpng-1.5.10/png.h.orig	2011-12-18 18:57:09.559673517 +0100
++++ libpng-1.5.10/png.h	2011-12-18 19:44:48.716435917 +0100
 @@ -2725,7 +2725,7 @@
   * scripts/symbols.def as well.
   */
  #ifdef PNG_EXPORT_LAST_ORDINAL
--  PNG_EXPORT_LAST_ORDINAL(233);
+-  PNG_EXPORT_LAST_ORDINAL(234);
 +  PNG_EXPORT_LAST_ORDINAL(1020);
  #endif
  
