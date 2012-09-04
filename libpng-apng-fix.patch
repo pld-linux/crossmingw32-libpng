@@ -1,38 +1,27 @@
---- libpng-1.5.10/scripts/symbols.def.orig	2012-03-29 07:06:56.000000000 +0200
-+++ libpng-1.5.10/scripts/symbols.def	2012-04-25 17:53:13.007292298 +0200
-@@ -240,3 +240,24 @@
+--- libpng-1.5.7/scripts/symbols.def.orig	2011-12-15 16:45:34.000000000 +0100
++++ libpng-1.5.7/scripts/symbols.def	2011-12-18 19:44:57.326436207 +0100
+@@ -239,4 +239,24 @@
+  png_get_cHRM_XYZ_fixed @231
   png_set_cHRM_XYZ @232
   png_set_cHRM_XYZ_fixed @233
   png_set_check_for_invalid_index @234
-+;missing warning
-+ png_write_frame_head @1001
-+ png_write_frame_tail @1002
-+ png_set_progressive_frame_fn @1003
-+ png_get_acTL @1004
-+ png_set_acTL @1005
-+ png_get_num_frames @1006
-+ png_get_num_plays @1007
-+ png_get_next_frame_fcTL @1008
-+ png_set_next_frame_fcTL @1009
-+ png_get_next_frame_width @1010
-+ png_get_next_frame_height @1011
-+ png_get_next_frame_x_offset @1012
-+ png_get_next_frame_y_offset @1013
-+ png_get_next_frame_delay_num @1014
-+ png_get_next_frame_delay_den @1015
-+ png_get_next_frame_dispose_op @1016
-+ png_get_next_frame_blend_op @1017
-+ png_get_first_frame_is_hidden @1018
-+ png_set_first_frame_is_hidden @1019
-+ png_read_frame_head @1020
---- libpng-1.5.10/png.h.orig	2011-12-18 18:57:09.559673517 +0100
-+++ libpng-1.5.10/png.h	2011-12-18 19:44:48.716435917 +0100
-@@ -2725,7 +2725,7 @@
-  * scripts/symbols.def as well.
-  */
- #ifdef PNG_EXPORT_LAST_ORDINAL
--  PNG_EXPORT_LAST_ORDINAL(234);
-+  PNG_EXPORT_LAST_ORDINAL(1020);
- #endif
- 
- #ifdef __cplusplus
++ png_get_acTL @235
++ png_set_acTL @236
++ png_get_num_frames @237
++ png_get_num_plays @238
++ png_get_next_frame_fcTL @239
++ png_set_next_frame_fcTL @240
++ png_get_next_frame_width @241
++ png_get_next_frame_height @242
++ png_get_next_frame_x_offset @243
++ png_get_next_frame_y_offset @244
++ png_get_next_frame_delay_num @245
++ png_get_next_frame_delay_den @246
++ png_get_next_frame_dispose_op @247
++ png_get_next_frame_blend_op @248
++ png_get_first_frame_is_hidden @249
++ png_set_first_frame_is_hidden @250
++ png_read_frame_head @251
++ png_set_progressive_frame_fn @252
++ png_write_frame_head @253
++ png_write_frame_tail @254

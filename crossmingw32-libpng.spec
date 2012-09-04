@@ -2,15 +2,15 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.5.10
+Version:	1.5.12
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	9c2ac3c3a31de2ab867875718f8de18e
+# Source0-md5:	0fd51add1da6a0e470e0c726c59171b9
 Patch0:		%{realname}-pngminus.patch
 Patch1:		http://downloads.sourceforge.net/libpng-apng/%{realname}-%{version}-apng.patch.gz
-# Patch1-md5:	88517ab0e9c0be2590800116e2b50c8d
+# Patch1-md5:	7f2924b1fe0cca9080e18b8720443716
 Patch2:		%{realname}-apng-fix.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
@@ -39,8 +39,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # arch-specific flags (like alpha's -mieee) are not valid for i386 gcc
 %define		optflags	-O2
 %endif
-# -z options are invalid for mingw linker
+# -z options are invalid for mingw linker, most of -f options are Linux-specific
 %define		filterout_ld    -Wl,-z,.*
+%define		filterout_c	-f[-a-z0-9=]*
 
 %description
 The PNG library is a collection of routines used to create and
