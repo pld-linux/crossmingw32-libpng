@@ -2,15 +2,15 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.5.15
-Release:	3
+Version:	1.6.6
+Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	e3122e7b5b5c36c034a4624c65f8a9d8
+# Source0-md5:	3a41dcd58bcac7cc191c2ec80c7fb2ac
 Patch0:		%{realname}-pngminus.patch
-Patch1:		http://downloads.sourceforge.net/libpng-apng/%{realname}-1.5.15-apng.patch.gz
-# Patch1-md5:	3ae9ea7e4bd201f0b25e25cd6049b094
+Patch1:		http://downloads.sourceforge.net/libpng-apng/%{realname}-1.6.5-apng.patch.gz
+# Patch1-md5:	e05f0ba9534e0331bf499d63811cbf93
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
-ln -sf libpng15.dll.a $RPM_BUILD_ROOT%{_libdir}/libpng.dll.a
+ln -sf libpng16.dll.a $RPM_BUILD_ROOT%{_libdir}/libpng.dll.a
 
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
@@ -121,20 +121,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libpng15.dll.a
+%{_libdir}/libpng16.dll.a
 %{_libdir}/libpng.dll.a
-%{_libdir}/libpng15.la
+%{_libdir}/libpng16.la
 %{_libdir}/libpng.la
-%{_includedir}/libpng15
+%{_includedir}/libpng16
 %{_includedir}/png*.h
-%{_pkgconfigdir}/libpng15.pc
+%{_pkgconfigdir}/libpng16.pc
 %{_pkgconfigdir}/libpng.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libpng15.a
+%{_libdir}/libpng16.a
 %{_libdir}/libpng.a
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libpng15-*.dll
+%{_dlldir}/libpng16-*.dll
