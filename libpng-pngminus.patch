@@ -1,11 +1,11 @@
 --- libpng-1.5.7/contrib/pngminus/makefile.std.orig	2011-12-15 16:45:32.000000000 +0100
 +++ libpng-1.5.7/contrib/pngminus/makefile.std	2011-12-18 16:24:38.099367091 +0100
-@@ -12,20 +12,20 @@
- #PNGLIB = -L$(PNGPATH)/lib -lpng15
- #PNGLIBS = $(PNGPATH)/lib/libpng15.a
+@@ -12,21 +12,21 @@
+ #PNGLIB = -L$(PNGPATH)/lib -lpng16
+ #PNGLIBS = $(PNGPATH)/lib/libpng16.a
  PNGINC = -I../..
 -PNGLIB = -L../.. -lpng
-+PNGLIB = -L../.. -L../../.libs -lpng15
++PNGLIB = -L../.. -L../../.libs -lpng16
  PNGLIBS = ../../libpng.a
  
  #ZPATH = /usr/local
@@ -19,8 +19,9 @@
 +ZLIB = -lz
 +ZLIBS = -lz
  
--CFLAGS=$(PNGINC) $(ZINC)
-+CFLAGS=$(OPT_FLAGS) $(PNGINC) $(ZINC)
+-CPPFLAGS=$(PNGINC) $(ZINC)
++CPPFLAGS=$(OPT_FLAGS) $(PNGINC) $(ZINC)
+ CFLAGS=
  LDLIBS=$(PNGLIB) $(ZLIB)
 -LDLIBSS=$(PNGLIBS) $(ZLIBS)
 +LDLIBSS=$(LD_FLAGS) $(PNGLIBS) $(ZLIBS)
