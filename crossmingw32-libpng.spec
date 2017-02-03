@@ -2,22 +2,22 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.6.26
+Version:	1.6.28
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	faed9bb495d2e12dd0c9ec561ca60cd8
+# Source0-md5:	425354f86c392318d31aedca71019372
 Patch0:		%{realname}-pngminus.patch
 Patch1:		http://downloads.sourceforge.net/libpng-apng/%{realname}-%{version}-apng.patch.gz
-# Patch1-md5:	921d2717418bf74b40b94191c8b282c7
+# Patch1-md5:	fca7c6d87c8352e645facefc2e1dd153
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-zlib
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz >= 1:4.999.7
-Requires:	crossmingw32-zlib
+Requires:	crossmingw32-zlib >= 1.2.9
 Provides:	crossmingw32-libpng(APNG) = 0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -75,7 +75,7 @@ Statyczna biblioteka libpng (wersja skrośna MinGW32).
 Summary:	libpng - DLL library for Windows
 Summary(pl.UTF-8):	libpng - biblioteka DLL dla Windows
 Group:		Applications/Emulators
-Requires:	crossmingw32-zlib-dll
+Requires:	crossmingw32-zlib-dll >= 1.2.9
 Requires:	wine
 Provides:	crossmingw32-libpng-dll(APNG) = 0.10
 
