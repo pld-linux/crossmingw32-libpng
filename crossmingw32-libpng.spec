@@ -2,14 +2,15 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.6.50
+Version:	1.6.52
+%define	apng_version	1.6.51
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	https://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	e583e61455c4f40d565d85c0e9a2fbf9
-Patch0:		https://downloads.sourceforge.net/libpng-apng/%{realname}-%{version}-apng.patch.gz
-# Patch0-md5:	8152c30338297957c9da0568a4352ee9
+# Source0-md5:	a496982a92ec964e7ca7be4580ee466f
+Patch0:		https://downloads.sourceforge.net/libpng-apng/%{realname}-%{apng_version}-apng.patch.gz
+# Patch0-md5:	c0e913c8f84b3ea64577e11bb7f93cb5
 Patch1:		%{realname}-pngminus.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
@@ -31,6 +32,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_prefix			%{_sysprefix}/%{target}
 %define		_libdir			%{_prefix}/lib
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
+%define		_docdir			%{_sysprefix}/share/doc
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
@@ -122,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc ANNOUNCE CHANGES LICENSE README TODO
 %{_libdir}/libpng16.dll.a
 %{_libdir}/libpng.dll.a
 %{_libdir}/libpng16.la
