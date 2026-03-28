@@ -2,15 +2,15 @@
 Summary:	PNG library - MinGW32 cross version
 Summary(pl.UTF-8):	Biblioteka PNG - wersja skrośna dla MinGW32
 Name:		crossmingw32-%{realname}
-Version:	1.6.55
-%define	apng_version	1.6.54
+Version:	1.6.56
+%define	apng_version	%{version}
 Release:	1
 License:	distributable
 Group:		Development/Libraries
 Source0:	https://downloads.sourceforge.net/libpng/%{realname}-%{version}.tar.xz
-# Source0-md5:	bc950b5a06ec1028285e14a127f6fb6e
+# Source0-md5:	e30798a97361f11390a624b5b48c1c74
 Patch0:		https://downloads.sourceforge.net/libpng-apng/%{realname}-%{apng_version}-apng.patch.gz
-# Patch0-md5:	073fb9cc80b7bad022bdfef53ddea540
+# Patch0-md5:	4e8982791945079d158f20a33c5872c9
 Patch1:		%{realname}-pngminus.patch
 URL:		http://www.libpng.org/pub/png/libpng.html
 BuildRequires:	crossmingw32-gcc
